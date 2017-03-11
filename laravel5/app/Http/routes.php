@@ -14,3 +14,12 @@
 Route::get('/', function () {
     return view('welcome');
 });
+Route::get('ntaps', function () {
+    return 'mantap gan';
+});
+Route::get('pengguna/{pengguna}', function ($pengguna) {
+    return "Hello World dari pengguna $pengguna";
+});
+Route::get('kelas_b/framework/{mhs?}', function ($mhs="Anonim") {
+    return "Selamat Datang $mhs";
+});
