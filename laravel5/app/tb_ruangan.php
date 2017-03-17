@@ -1,0 +1,11 @@
+<?php
+
+namespace App;
+
+use Illuminate\Database\Eloquent\Model;
+
+class tb_ruangan extends Model
+{
+    protected $table = 'tb_ruangan';
+	protected $fillable = ['title'];
+}

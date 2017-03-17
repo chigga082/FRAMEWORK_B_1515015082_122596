@@ -38,7 +38,7 @@
     <body>
         <div class="container">
             <div class="content">
-                <div class="title">aye aye sir</div>
+                <div class="title">Reza Arap Oktovian<br>Gamers Ganteng Idaman</div>
             </div>
         </div>
     </body>
