@@ -11,18 +11,42 @@ class tb_mkController extends Controller
 {
     public function awal()
 	{
-		return "Hello Hooligans matakuliah";
+		return view('tb_mk.awal',['data'=>tb_mk::all()]);;
 	}
 	public function tambah()
 	{
-		return $this->simpan();
+		return view('tb_mk.tambah');
 	}
-	public function simpan()
+	public function simpan(Request $input)
 	{
 		$tb_mk = new tb_mk();
-		$tb_mk->title = 'Visual';
-		$tb_mk->keterangan = 'matakuliah wajib';
-		$tb_mk->save();
-		return "data dengan nilai {$tb_mk->title} telah disimpan";
+		$tb_mk->title = $input->title;
+		$tb_mk->keterangan = $input->keterangan;
+		$informasi=$tb_mk->save() ? 'Berhasil simpan data' : 'gagal simpan data';
+		return redirect('tb_mk')->with(['informasi'=>$informasi]);
+	}
+	public function edit($id)
+	{
+		$tb_mk = tb_mk::find($id);
+		return view('tb_mk.edit')->with(array('tb_mk'=>$tb_mk));
+	}
+	public function lihat($id)
+	{
+		$tb_mk = tb_mk::find($id);
+		return view('tb_mk.lihat')->with(array('tb_mk'=>$tb_mk));
+	}
+	public function update($id, Request $input)
+	{
+		$tb_mk = tb_mk::find($id);
+		$tb_mk->title = $input->title;
+		$tb_mk->keterangan = $input->keterangan;
+		$informasi=$tb_mk->save() ? 'Berhasil update data' : 'gagal update data';
+		return redirect('tb_mk')->with(['informasi'=>$informasi]);
+	}
+	public function hapus($id)
+	{
+		$tb_mk = tb_mk::find($id);
+		$informasi=$tb_mk->delete() ? 'Berhasil hapus data' : 'gagal hapus data';
+		return redirect('tb_mk')->with(['informasi'=>$informasi]);
 	}
 }

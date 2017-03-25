@@ -50,3 +50,21 @@ Route::get('tb_dosen_mk/tambah','tb_dosen_mkController@tambah');
 Route::get('tb_jadwal_mk','tb_jadwal_mkController@awal');
 
 Route::get('tb_jadwal_mk/tambah','tb_jadwal_mkController@tambah');
+
+
+Route::get('pengguna/{pengguna}','PenggunaController@lihat');
+Route::post('pengguna/simpan','PenggunaController@simpan');
+Route::get('pengguna/edit/{pengguna}','PenggunaController@edit');
+Route::post('pengguna/edit/{pengguna}','PenggunaController@update');
+Route::get('pengguna/hapus/{pengguna}','PenggunaController@hapus');
+
+Route::get('tb_mk/{tb_mk}','tb_mkController@lihat');
+Route::post('tb_mk/simpan','tb_mkController@simpan');
+Route::get('tb_mk/edit/{tb_mk}','tb_mkController@edit');
+Route::post('tb_mk/edit/{tb_mk}','tb_mkController@update');
+Route::get('tb_mk/hapus/{tb_mk}','tb_mkController@hapus');
+
+Route::post('tb_ruangan/simpan','tb_ruanganController@simpan');
+Route::get('tb_ruangan/edit/{tb_ruangan}','tb_ruanganController@edit');
+Route::post('tb_ruangan/edit/{tb_ruangan}','tb_ruanganController@update');
+Route::get('tb_ruangan/hapus/{tb_ruangan}','tb_ruanganController@hapus');

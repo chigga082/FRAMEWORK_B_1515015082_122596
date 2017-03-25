@@ -5,24 +5,48 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
-use App\pengguna;
+use App\Pengguna;
 
 class PenggunaController extends Controller
 {
     public function awal()
 	{
-		return "Hello Hooligans";
+		return view('pengguna.awal',['data'=>Pengguna::all()]);;
 	}
 	public function tambah()
 	{
-		return $this->simpan();
+		return view('pengguna.tambah');
 	}
-	public function simpan()
+	public function simpan(Request $input)
 	{
-		$pengguna = new pengguna();
-		$pengguna->username = 'Chrisman Bonor Sinaga';
-		$pengguna->password = '1515015082';
-		$pengguna->save();
-		return "data dengan username {$pengguna->username} telah disimpan";
+		$pengguna = new Pengguna;
+		$pengguna->username = $input->username;
+		$pengguna->password = $input->password;
+		$informasi=$pengguna->save() ? 'Berhasil simpan data' : 'gagal simpan data';
+		return redirect('pengguna')->with(['informasi'=>$informasi]);
+	}
+	public function edit($id)
+	{
+		$pengguna = Pengguna::find($id);
+		return view('pengguna.edit')->with(array('pengguna'=>$pengguna));
+	}
+	public function lihat($id)
+	{
+		$pengguna = Pengguna::find($id);
+		return view('pengguna.lihat')->with(array('pengguna'=>$pengguna));
+	}
+	public function update($id, Request $input)
+	{
+		$pengguna = Pengguna::find($id);
+		$pengguna->username = $input->username;
+		$pengguna->password = $input->password;
+		$informasi=$pengguna->save() ? 'Berhasil update data' : 'gagal update data';
+		return redirect('pengguna')->with(['informasi'=>$informasi]);
+	}
+	public function hapus($id)
+	{
+		$pengguna = Pengguna::find($id);
+		$informasi=$pengguna->delete() ? 'Berhasil hapus data' : 'gagal hapus data';
+		return redirect('pengguna')->with(['informasi'=>$informasi]);
 	}
 }
