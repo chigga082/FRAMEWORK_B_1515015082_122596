@@ -11,6 +11,9 @@
 |
 */
 
+Route::get('mahasiswa_pengguna','tb_mhsController@tb_mhs');
+
+
 Route::get('/', function () {
     return view('welcome');
 });

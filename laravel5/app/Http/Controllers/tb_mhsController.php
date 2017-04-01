@@ -6,9 +6,21 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\tb_mhs;
+use App\pengguna;
 
 class tb_mhsController extends Controller
 {
+	public function tb_mhs(){
+	$tb_mhs = tb_mhs::all();
+
+	//dd($tb_mhs);
+	foreach($tb_mhs as $mhs){
+	echo"Nama: ".$mhs->nama;
+	echo"<br>";
+	echo"Username: ".$mhs->pengguna->username;
+	echo"<br>";
+	}
+	}
     public function awal()
 	{
 		return "Hello Hooligans mahasiswa";
