@@ -16,9 +16,14 @@
 			</tr>
 		</thead>
 		<tbody>
-			<?php $x=1;?>
+		
+			
+			<?php 
+			
+			$x=(1+($semuaMahasiswa->CurrentPage()-1)*2);?>
 			@foreach ($semuaMahasiswa as $mahasiswa)
 				<tr>
+				
 					<td>{{ $x++ }}</td>
 					<td>{{ $mahasiswa->nama or 'nama kosong' }}</td>
 					<td>{{ $mahasiswa->nim or 'nim kosong' }}</td>
@@ -34,5 +39,8 @@
 				@endforeach
 		</tbody>
 	</table>
+</div>
+<div align="right">
+	{{$semuaMahasiswa->render()}}
 </div>
 @stop

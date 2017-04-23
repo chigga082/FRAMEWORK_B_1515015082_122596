@@ -1,21 +1,52 @@
 <?php
 
-/*
-|--------------------------------------------------------------------------
-| Application Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register all of the routes for an application.
-| It's a breeze. Simply tell Laravel the URIs it should respond to
-| and give it the controller to call when that URI is requested.
-|
-*/
+use Illuminate\Http\Request;
+Route::get('/login2','SesiController@form');
+Route::post('/login2','SesiController@validasi');
+Route::get('/logout','SesiController@logout');
 
-// Route::get('mahasiswa_pengguna','MahasiswaController@mahasiswa');
+Route::group(['middleware'=>'AutentifikasiUser'],function()
+{
+Route::get('/','SesiController@index');
+//Route::get('mahasiswa_pengguna','MahasiswaController@mahasiswa');
 
-Route::get('/', function () {
+/*Route::get('/', function () {
     return view('welcome');
-});
+});*/
+
+
+Route::get('orang','OrangController@index');
+
+/*Route::get('/', function (Illuminate\Http\Request $request) 
+{
+	echo "ini adalah  request dari method get ".$request->nama;
+});*/
+
+//Route::get('/', function () 
+//{
+//	echo Form::open(['url'=>'/']).
+//			Form::label('nama').
+//			Form::text('nama',null).
+//			Form::submit('kirim').
+//			Form::close();
+//});
+
+//Route::post('/', function (Request $request) 
+//{
+//	echo "hasil dari form input nama : ".$request->nama;
+//});
+
+/*Route::get('/', function () {
+    return \App\Dosen_Matakuliah::whereHas('dosen',function($query)
+	{
+		$query->where('nama','like','%Chris%');
+	})
+	->orWhereHas('matakuliah',function($kueri)
+	{
+		$kueri->where('title','like','%omegat%');
+	})
+	->with('dosen')->groupBy('dosen_id')->get();
+});*/
 
 Route::get('hello-world',function(){
 	return 'Hello-world';
@@ -27,6 +58,14 @@ Route::get('pengguna/{pengguna}',function($pengguna){
 */
 Route::get('kelas_b/framework/{mhs?}',function($mhs="Anonim"){
 	return "Selamat datang $mhs";
+});
+
+Route::get('/wajib',function(){
+	return \App\Dosen_Matakuliah::whereHas('matakuliah',function($q){
+		$q->where('keterangan','=','wajib');
+	})
+	->with('matakuliah')->get();
+//	return "wajib gan";
 });
 
 Route::auth();
@@ -94,3 +133,8 @@ Route::post('dosen_matakuliah/simpan','Dosen_MatakuliahController@simpan');
 Route::get('dosen_matakuliah/edit/{dosen_matakuliah}','Dosen_MatakuliahController@edit');
 Route::post('dosen_matakuliah/edit/{dosen_matakuliah}','Dosen_MatakuliahController@update');
 Route::get('dosen_matakuliah/hapus/{dosen_matakuliah}','Dosen_MatakuliahController@hapus');
+
+Route::get('ujiHas','RelationshipRebornController@ujiHas');
+Route::get('ujiDoesntHave','RelationshipRebornController@ujiDoesntHave');
+Route::get('ujiDoesntHaveMK','RelationshipRebornController@ujiDoesntHaveMK');
+});
